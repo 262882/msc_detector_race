@@ -10,23 +10,27 @@ import numpy as np
 import onnxruntime as rt
 sys.path.append(os.path.join(sys.path[0], 'tooling/'))
 from helper_func import load_video, nanodet_preprocess, ssd_mobilenet_preprocess, yolox_preprocess
-from helper_func import yolov3_preprocess, yolov4_preprocess
+from helper_func import yolov3_preprocess, yolov4_preprocess, FRCNN_preprocess, retinanet_preprocess
 
 output_dir = 'results/'
 model_dir = 'models/'
 models_320 = [
             ['nanodet.onnx', nanodet_preprocess],
             ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess],
+            #['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
 models_416 = [
             ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess],
             ['yolox_nano.onnx', yolox_preprocess],
             ['yolox_tiny.onnx', yolox_preprocess],
             ['tiny-yolov3-11.onnx', yolov3_preprocess],
+            ['yolov3-10.onnx', yolov3_preprocess],    
             ['yolov4.onnx', yolov4_preprocess],
+            ['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
 models_512 = [
             ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess],
+            #['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
 
 test_sample = 'sample/detector_test.avi'

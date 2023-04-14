@@ -13,7 +13,7 @@ def std_normalize(img):
 
 def nanodet_preprocess(inname, img):
     '''
-    return: NxCxHxW 
+    desired image shape: NxCxHxW 
     '''
     blob = cv2.dnn.blobFromImage(std_normalize(img), 
                                 size = img.shape[:-1],
@@ -23,7 +23,7 @@ def nanodet_preprocess(inname, img):
 
 def yolox_preprocess(inname, img):
     '''
-    return: NxCxHxW 
+    desired image shape: NxCxHxW 
     '''
     blob = cv2.dnn.blobFromImage(img,
                                 size = img.shape[:-1], 
@@ -32,14 +32,14 @@ def yolox_preprocess(inname, img):
 
 def ssd_mobilenet_preprocess(inname, img):
     '''
-    return: NxHxWxC 
+    desired image shape: NxHxWxC 
     '''
     blob = img[np.newaxis, ...]
     return {inname[0]:blob}
 
 def yolov3_preprocess(inname, img):
     '''
-    return: NxCxHxW 
+    desired image shape: NxCxHxW 
     '''
     image_data = np.array(img, dtype='float32')
     image_data /= 255.
@@ -50,12 +50,32 @@ def yolov3_preprocess(inname, img):
 
 def yolov4_preprocess(inname, img):
     '''
-    return: NxHxWxC 
+    desired image shape: NxHxWxC 
     '''
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = img/255
     out_img = img[np.newaxis, ...].astype(np.float32)
     return {inname[0]:out_img}
+
+def FRCNN_preprocess(inname, img):
+    '''
+    desired image shape: CxHxW 
+    '''
+    img = np.transpose(img, [2, 0, 1]) # HWC -> CHW
+    mean_vec = np.array([102.9801, 115.9465, 122.7717])
+    for i in range(img.shape[0]):
+        img[i, :, :] = img[i, :, :] - mean_vec[i]
+
+    return {inname[0]:img.astype('float32')}
+
+def retinanet_preprocess(inname, img):
+    '''
+    desired image shape: NxCxHxW 
+    '''
+    blob = cv2.dnn.blobFromImage(std_normalize(img), 
+                                size = img.shape[:-1],
+                                swapRB=True, crop=False) 
+    return {inname[0]:blob}
 
 def load_video(path, out_res):
 
