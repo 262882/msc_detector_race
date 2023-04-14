@@ -15,18 +15,18 @@ from helper_func import yolov3_preprocess, yolov4_preprocess
 output_dir = 'results/'
 model_dir = 'models/'
 models_320 = [
-            ['nanodet.onnx', nanodet_preprocess, True],
-            ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess, True],
+            ['nanodet.onnx', nanodet_preprocess],
+            ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess],
             ]
 models_416 = [
-            ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess, True],
-            ['yolox_nano.onnx', yolox_preprocess, True],
-            ['yolox_tiny.onnx', yolox_preprocess, True],
-            ['tiny-yolov3-11.onnx', yolov3_preprocess, False],
-            ['yolov4.onnx', yolov4_preprocess, True],
+            ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess],
+            ['yolox_nano.onnx', yolox_preprocess],
+            ['yolox_tiny.onnx', yolox_preprocess],
+            ['tiny-yolov3-11.onnx', yolov3_preprocess],
+            #['yolov4.onnx', yolov4_preprocess],
             ]
 models_512 = [
-            ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess, True],
+            ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess],
             ]
 
 test_sample = 'sample/detector_test.avi'
@@ -64,12 +64,9 @@ for model_batch in model_batches:
 
         time_log = []
         start_time = time.perf_counter()
-        image_size = np.array([res, res], dtype=np.float32).reshape(1, 2)
+
         for frame in data_set:
-            if detector[2]:
-                inp = {inname[0]:detector[1](frame)}
-            else: 
-                inp = {inname[0]:detector[1](frame), inname[1]:image_size}
+            inp = detector[1](inname, frame)
             layer_output = session.run(outname, inp)
             time_log.append(time.perf_counter()-start_time)
 

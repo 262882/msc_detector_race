@@ -11,32 +11,33 @@ def std_normalize(img):
     img = img - MEAN / STD
     return img
 
-def nanodet_preprocess(img):
+def nanodet_preprocess(inname, img):
     '''
     return: NxCxHxW 
     '''
     blob = cv2.dnn.blobFromImage(std_normalize(img), 
                                 size = img.shape[:-1],
                                 swapRB=True, crop=False) 
-    return blob
+    
+    return {inname[0]:blob}
 
-def yolox_preprocess(img):
+def yolox_preprocess(inname, img):
     '''
     return: NxCxHxW 
     '''
     blob = cv2.dnn.blobFromImage(img,
                                 size = img.shape[:-1], 
                                 swapRB=True, crop=False) 
-    return blob
+    return {inname[0]:blob}
 
-def ssd_mobilenet_preprocess(img):
+def ssd_mobilenet_preprocess(inname, img):
     '''
     return: NxHxWxC 
     '''
     blob = img[np.newaxis, ...]
-    return blob
+    return {inname[0]:blob}
 
-def yolov3_preprocess(img):
+def yolov3_preprocess(inname, img):
     '''
     return: NxCxHxW 
     '''
@@ -44,9 +45,10 @@ def yolov3_preprocess(img):
     image_data /= 255.
     image_data = np.transpose(image_data, [2, 0, 1])
     image_data = np.expand_dims(image_data, 0)
-    return image_data
+    image_size = np.array([image_data.shape[1], image_data.shape[0]], dtype=np.float32).reshape(1, 2)
+    return {inname[0]:image_data, inname[1]:image_size}
 
-def yolov4_preprocess(img):
+def yolov4_preprocess(inname, img):
     '''
     return: NxHxWxC 
     '''
