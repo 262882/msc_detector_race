@@ -4,12 +4,22 @@
 import cv2
 import numpy as np
 
-def _normalize(img): 
+def std_normalize(img): 
     img = img.astype(np.float32) / 255
     MEAN = np.array([0.406, 0.456, 0.485], dtype=np.float32)
     STD = np.array([0.225, 0.224, 0.229], dtype=np.float32)
     img = img - MEAN / STD
     return img
+
+def std_preprocess(img):
+    blob = cv2.dnn.blobFromImage(std_normalize(img), #scalefactor=1/255,
+                                size = img.shape[:-1],  # Resolution multiple of 32
+                                swapRB=True, crop=False) 
+    return blob
+
+def no_preprocess(img):
+    blob = img[np.newaxis, ...]
+    return blob
 
 def load_video(path, out_res):
 
