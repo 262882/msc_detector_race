@@ -12,20 +12,48 @@ def std_normalize(img):
     return img
 
 def nanodet_preprocess(img):
-    blob = cv2.dnn.blobFromImage(std_normalize(img), #scalefactor=1/255,
-                                size = img.shape[:-1],  # Resolution multiple of 32
+    '''
+    return: NxCxHxW 
+    '''
+    blob = cv2.dnn.blobFromImage(std_normalize(img), 
+                                size = img.shape[:-1],
                                 swapRB=True, crop=False) 
     return blob
 
 def yolox_preprocess(img):
-    blob = cv2.dnn.blobFromImage(img, #scalefactor=1/255,
-                                size = img.shape[:-1],  # Resolution multiple of 32
+    '''
+    return: NxCxHxW 
+    '''
+    blob = cv2.dnn.blobFromImage(img,
+                                size = img.shape[:-1], 
                                 swapRB=True, crop=False) 
     return blob
 
 def ssd_mobilenet_preprocess(img):
+    '''
+    return: NxHxWxC 
+    '''
     blob = img[np.newaxis, ...]
     return blob
+
+def yolov3_preprocess(img):
+    '''
+    return: NxCxHxW 
+    '''
+    image_data = np.array(img, dtype='float32')
+    image_data /= 255.
+    image_data = np.transpose(image_data, [2, 0, 1])
+    image_data = np.expand_dims(image_data, 0)
+    return image_data
+
+def yolov4_preprocess(img):
+    '''
+    return: NxHxWxC 
+    '''
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = img/255
+    img[np.newaxis, ...].astype(np.float32)
+    return img
 
 def load_video(path, out_res):
 
