@@ -16,11 +16,11 @@ output_dir = 'results/'
 model_dir = 'models/'
 models_320 = [
             ['nanodet.onnx', nanodet_preprocess],
-            ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess],
+            ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
             #['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
 models_416 = [
-            ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess],
+            ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
             ['yolox_nano.onnx', yolox_preprocess],
             ['yolox_tiny.onnx', yolox_preprocess],
             ['tiny-yolov3-11.onnx', yolov3_preprocess],
@@ -29,7 +29,7 @@ models_416 = [
             ['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
 models_512 = [
-            ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess],
+            ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
             #['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
 
