@@ -11,13 +11,19 @@ def std_normalize(img):
     img = img - MEAN / STD
     return img
 
-def std_preprocess(img):
+def nanodet_preprocess(img):
     blob = cv2.dnn.blobFromImage(std_normalize(img), #scalefactor=1/255,
                                 size = img.shape[:-1],  # Resolution multiple of 32
                                 swapRB=True, crop=False) 
     return blob
 
-def no_preprocess(img):
+def yolox_preprocess(img):
+    blob = cv2.dnn.blobFromImage(img, #scalefactor=1/255,
+                                size = img.shape[:-1],  # Resolution multiple of 32
+                                swapRB=True, crop=False) 
+    return blob
+
+def ssd_mobilenet_preprocess(img):
     blob = img[np.newaxis, ...]
     return blob
 
