@@ -2,6 +2,7 @@
 """Start object detector test"""
 
 import time
+import json
 import sys
 import os
 import cv2
@@ -10,6 +11,7 @@ import onnxruntime as rt
 sys.path.append(os.path.join(sys.path[0], 'tooling/'))
 from helper_func import load_video
 
+output_dir = 'results/'
 model_dir = 'models/'
 models_320 = ['nanodet.onnx']
 models_416 = []
@@ -20,14 +22,37 @@ test_sample = 'sample/detector_test.avi'
 print("Welcome to the Object Detector Race")
 run_time = time.perf_counter()
 
-#### ONNX settings
+results = {}
+
+#### ONNX settings ####
 providers = ['CPUExecutionProvider']
 sess_options = rt.SessionOptions()  # https://onnxruntime.ai/docs/performance/tune-performance.html
 sess_options.intra_op_num_threads = 1
 sess_options.execution_mode = rt.ExecutionMode.ORT_SEQUENTIAL
 
 print("Prepare 320x320 environment")
-data_set = load_video(test_sample, 320)
+data_320 = load_video(test_sample, 320)
+
+for detector in models_320:
+
+    print("Initialising detector")
+    session = rt.InferenceSession(model_dir+detector, sess_options=sess_options, providers=providers)
+    outname = [i.name for i in session.get_outputs()] 
+    inname = [i.name for i in session.get_inputs()]
+    print("Detector ready")
+
+    time_log = []
+    start_time = time.perf_counter()
+    for frame in data_320:
+        time_log.append(time.perf_counter()-start_time)
+
+    print(time_log)
+
+    results[detector[:-5] + '_320x320'] = time_log
+
+with open("./" + output_dir + "race_results.json", 'w') as out_file:
+            json.dump(results, out_file, indent=4)
+
 
 '''
 print("Initialising detector")
