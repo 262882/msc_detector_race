@@ -54,8 +54,8 @@ def yolov4_preprocess(inname, img):
     '''
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = img/255
-    img[np.newaxis, ...].astype(np.float32)
-    return img
+    out_img = img[np.newaxis, ...].astype(np.float32)
+    return {inname[0]:out_img}
 
 def load_video(path, out_res):
 

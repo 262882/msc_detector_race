@@ -23,7 +23,7 @@ models_416 = [
             ['yolox_nano.onnx', yolox_preprocess],
             ['yolox_tiny.onnx', yolox_preprocess],
             ['tiny-yolov3-11.onnx', yolov3_preprocess],
-            #['yolov4.onnx', yolov4_preprocess],
+            ['yolov4.onnx', yolov4_preprocess],
             ]
 models_512 = [
             ['ssd_mobilenet_v1_10.onnx', ssd_mobilenet_preprocess],
