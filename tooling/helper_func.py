@@ -77,6 +77,16 @@ def retinanet_preprocess(inname, img):
                                 swapRB=True, crop=True) 
     return {inname[0]:blob}
 
+def yolov5_preprocess(inname, img):
+    '''
+    desired image shape: NxCxHxW 
+    '''
+    image_data = np.array(img, dtype='float32')
+    image_data /= 255.
+    image_data = np.transpose(image_data, [2, 0, 1])
+    image_data = np.expand_dims(image_data, 0)
+    return {inname[0]:image_data}
+
 def load_video(path, out_res):
 
     batch_out = []

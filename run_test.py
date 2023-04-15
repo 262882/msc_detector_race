@@ -11,6 +11,7 @@ import onnxruntime as rt
 sys.path.append(os.path.join(sys.path[0], 'tooling/'))
 from helper_func import load_video, nanodet_preprocess, ssd_mobilenet_preprocess, yolox_preprocess
 from helper_func import yolov3_preprocess, yolov4_preprocess, FRCNN_preprocess, retinanet_preprocess
+from helper_func import yolov5_preprocess
 
 output_dir = 'results/'
 model_dir = 'models/'
@@ -34,6 +35,8 @@ models_416 = [
             ]
 models_640 = [
             ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
+            ['yolov5n.onnx', yolov5_preprocess],
+            ['yolov5s.onnx', yolov5_preprocess],
             ['retinanet-9.onnx', retinanet_preprocess],
             #['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
