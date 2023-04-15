@@ -37,6 +37,7 @@ models_640 = [
             ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
             ['yolov5n.onnx', yolov5_preprocess],
             ['yolov5s.onnx', yolov5_preprocess],
+            ['yolox_s.onnx', yolox_preprocess],
             ['retinanet-9.onnx', retinanet_preprocess],
             #['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
