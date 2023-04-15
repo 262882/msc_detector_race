@@ -73,8 +73,8 @@ def retinanet_preprocess(inname, img):
     desired image shape: NxCxHxW 
     '''
     blob = cv2.dnn.blobFromImage(std_normalize(img), 
-                                size = img.shape[:-1],
-                                swapRB=True, crop=False) 
+                                size = (640, 480),
+                                swapRB=True, crop=True) 
     return {inname[0]:blob}
 
 def load_video(path, out_res):

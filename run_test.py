@@ -32,8 +32,9 @@ models_416 = [
             ['yolov4.onnx', yolov4_preprocess],
             ['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
-models_512 = [
+models_640 = [
             ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
+            ['retinanet-9.onnx', retinanet_preprocess],
             #['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
 
@@ -46,7 +47,7 @@ results = {}
 model_batches = [
                 [models_320, 320],
                 [models_416, 416],
-                [models_512, 512],
+                [models_640, 640],
 ]
 
 #### ONNX settings ####
