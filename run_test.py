@@ -39,7 +39,7 @@ models_640 = [
             ['yolov5s.onnx', yolov5_preprocess],
             ['retinanet-9.onnx', retinanet_preprocess],
             ['FasterRCNN-10.onnx', FRCNN_preprocess],
-            ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
+            #['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
             ]
 
 test_sample = 'sample/detector_test.avi'
