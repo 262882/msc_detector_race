@@ -16,30 +16,30 @@ from helper_func import yolov5_preprocess
 output_dir = 'results/'
 model_dir = 'models/'
 models_320 = [
+            ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
             ['nanodet-m.onnx', nanodet_preprocess],
             ['nanodet-plus-m_320.onnx', nanodet_preprocess],
             ['nanodet-plus-m-1.5x_320.onnx', nanodet_preprocess],
-            ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
             #['FasterRCNN-10.onnx', FRCNN_preprocess],
             ]
 models_416 = [
             ['nanodet-plus-m_416.onnx', nanodet_preprocess],
             ['nanodet-plus-m-1.5x_416.onnx', nanodet_preprocess],
-            ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
-            ['yolox_nano.onnx', yolox_preprocess],
-            ['yolox_tiny.onnx', yolox_preprocess],
+            #['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
             ['tiny-yolov3-11.onnx', yolov3_preprocess],
             ['yolov3-10.onnx', yolov3_preprocess],    
             ['yolov4.onnx', yolov4_preprocess],
-            ['FasterRCNN-10.onnx', FRCNN_preprocess],
+            #['FasterRCNN-10.onnx', FRCNN_preprocess],
+            ['yolox_nano.onnx', yolox_preprocess],
+            ['yolox_tiny.onnx', yolox_preprocess],
             ]
 models_640 = [
-            ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
+            ['yolox_s.onnx', yolox_preprocess],
             ['yolov5n.onnx', yolov5_preprocess],
             ['yolov5s.onnx', yolov5_preprocess],
-            ['yolox_s.onnx', yolox_preprocess],
             ['retinanet-9.onnx', retinanet_preprocess],
-            #['FasterRCNN-10.onnx', FRCNN_preprocess],
+            ['FasterRCNN-10.onnx', FRCNN_preprocess],
+            ['ssd_mobilenet_v1_12.onnx', ssd_mobilenet_preprocess],
             ]
 
 test_sample = 'sample/detector_test.avi'
